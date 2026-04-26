@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mariadb:11
+    container_name: smart-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: smart_os
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build: .
+    container_name: smart-backend
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./target/app.jar:/app/app.jar
+
+volumes:
+  db_data:

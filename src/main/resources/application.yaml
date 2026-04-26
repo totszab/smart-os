@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://db:3306/smart_os
+    username: user
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8080
