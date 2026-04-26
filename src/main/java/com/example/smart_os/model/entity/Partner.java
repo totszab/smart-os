@@ -17,12 +17,12 @@ public class Partner {
     @ManyToOne
     private Groups groups;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Menu menu;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Theme theme;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Background background;
 }
