@@ -1,6 +1,6 @@
-package com.example.smart_os.dto.user;
+package com.example.smart_os.dto.partner;
 
-public record UserDto(
+public record PartnerDto(
         String id,
         String name,
         String groupId,

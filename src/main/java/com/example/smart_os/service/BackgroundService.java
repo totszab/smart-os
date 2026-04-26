@@ -3,9 +3,9 @@ package com.example.smart_os.service;
 import com.example.smart_os.dto.background.AssignBackgroundRequest;
 import com.example.smart_os.dto.background.CreateBackgroundRequest;
 import com.example.smart_os.model.entity.Background;
-import com.example.smart_os.model.entity.User;
+import com.example.smart_os.model.entity.Partner;
 import com.example.smart_os.repository.BackgroundRepository;
-import com.example.smart_os.repository.UserRepository;
+import com.example.smart_os.repository.PartnerRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.UUID;
 public class BackgroundService {
 
     private final BackgroundRepository backgroundRepository;
-    private final UserRepository userRepository;
+    private final PartnerRepository partnerRepository;
 
     @Transactional
     public Background create(CreateBackgroundRequest req) {
@@ -34,16 +34,16 @@ public class BackgroundService {
     }
 
     @Transactional
-    public User assignToUser(AssignBackgroundRequest req) {
-        User user = userRepository.findById(req.userId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public Partner assignToPartner(AssignBackgroundRequest req) {
+        Partner partner = partnerRepository.findById(req.partnerId())
+                .orElseThrow(() -> new RuntimeException("Partner not found"));
 
         Background bg = backgroundRepository.findById(req.backgroundId())
                 .orElseThrow(() -> new RuntimeException("Background not found"));
 
-        user.setBackground(bg);
+        partner.setBackground(bg);
 
-        return userRepository.save(user);
+        return partnerRepository.save(partner);
     }
 
     @Transactional

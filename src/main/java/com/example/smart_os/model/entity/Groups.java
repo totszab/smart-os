@@ -20,5 +20,5 @@ public class Groups {
     private String name;
 
     @OneToMany(mappedBy = "groups")
-    private List<User> users = new ArrayList<>();
+    private List<Partner> partners = new ArrayList<>();
 }

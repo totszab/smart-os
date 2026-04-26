@@ -1,11 +1,11 @@
 package com.example.smart_os.controller;
 
 import com.example.smart_os.converter.theme.ThemeConverter;
-import com.example.smart_os.converter.user.UserConverter;
+import com.example.smart_os.converter.partner.PartnerConverter;
 import com.example.smart_os.dto.theme.AssignThemeRequest;
 import com.example.smart_os.dto.theme.CreateThemeRequest;
 import com.example.smart_os.dto.theme.ThemeDto;
-import com.example.smart_os.dto.user.UserDto;
+import com.example.smart_os.dto.partner.PartnerDto;
 import com.example.smart_os.service.ThemeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class ThemeController {
 
     private final ThemeService themeService;
     private final ThemeConverter themeConverter;
-    private final UserConverter userConverter;
+    private final PartnerConverter partnerConverter;
 
     @PostMapping("/create")
     public ThemeDto create(@RequestBody CreateThemeRequest req) {
@@ -36,11 +36,11 @@ public class ThemeController {
                 .toList();
     }
 
-    @PutMapping("/assignToUser")
-    public UserDto assignToUser(@RequestBody AssignThemeRequest req) {
+    @PutMapping("/assignToPartner")
+    public PartnerDto assignToPartner(@RequestBody AssignThemeRequest req) {
 
-        return userConverter.toDto(
-                themeService.assignToUser(req)
+        return partnerConverter.toDto(
+                themeService.assignToPartner(req)
         );
     }
 

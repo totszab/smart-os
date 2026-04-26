@@ -2,10 +2,10 @@ package com.example.smart_os.service;
 
 import com.example.smart_os.dto.theme.AssignThemeRequest;
 import com.example.smart_os.dto.theme.CreateThemeRequest;
+import com.example.smart_os.model.entity.Partner;
 import com.example.smart_os.model.entity.Theme;
-import com.example.smart_os.model.entity.User;
 import com.example.smart_os.repository.ThemeRepository;
-import com.example.smart_os.repository.UserRepository;
+import com.example.smart_os.repository.PartnerRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.UUID;
 public class ThemeService {
 
     private final ThemeRepository themeRepository;
-    private final UserRepository userRepository;
+    private final PartnerRepository partnerRepository;
 
     @Transactional
     public Theme create(CreateThemeRequest req) {
@@ -35,17 +35,17 @@ public class ThemeService {
     }
 
     @Transactional
-    public User assignToUser(AssignThemeRequest request) {
+    public Partner assignToPartner(AssignThemeRequest request) {
 
-        User user = userRepository.findById(request.userId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        Partner partner = partnerRepository.findById(request.partnerId())
+                .orElseThrow(() -> new RuntimeException("Partner not found"));
 
         Theme theme = themeRepository.findById(request.themeId())
                 .orElseThrow(() -> new RuntimeException("Theme not found"));
 
-        user.setTheme(theme);
+        partner.setTheme(theme);
 
-        return userRepository.save(user);
+        return partnerRepository.save(partner);
     }
 
     @Transactional
